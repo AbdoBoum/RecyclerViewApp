@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgc"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_12dp"
+        android:backgroundTint="#FFF"
+        android:elevation="20dp"
+        android:orientation="vertical"
+        android:outlineProvider="bounds"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/vector"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="149dp"
+                android:layout_marginEnd="152dp"
+                android:src="@drawable/ic_person_outline_black_24dp"
+                android:text="Hello" />
+
+            <ImageView
+                android:id="@+id/back_to_login"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="17dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="#6579EA" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/username_registre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:hint="Username"
+            android:inputType="text"
+            android:theme="@style/MyEditText" />
+
+        <EditText
+            android:id="@+id/password_registre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:theme="@style/MyEditText" />
+
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:theme="@style/MyEditText" />
+
+        <Button
+            android:id="@+id/registre_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/varela"
+            android:text="Registre"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

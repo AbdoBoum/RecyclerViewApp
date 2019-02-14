@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin_lay"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="#F0F8FF"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
+
+        <ImageView
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/upload"
+            android:tint="#ADD8E6" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/lin_lay"
+        android:text="TITLE"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/etablissement_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/text1"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Title"
+        android:layout_marginBottom="30dp"
+        android:inputType="text"
+        android:theme="@style/MyEditText" />
+
+    <TextView
+        android:id="@+id/text11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/etablissement_title"
+        android:text="DESCRIPTION"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/etablissement_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/text11"
+        android:hint="Description"
+        android:layout_marginBottom="30dp"
+        android:inputType="text"
+        android:theme="@style/MyEditText" />
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_below="@+id/etablissement_description"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/varela"
+        android:text="ADD"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorPrimary"/>
+
+
+
+</RelativeLayout>
