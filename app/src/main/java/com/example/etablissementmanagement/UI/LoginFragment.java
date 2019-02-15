@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.etablissementmanagement.Repositories.UserRepository;
 import com.example.etablissementmanagement.Models.User;
-import com.example.etablissementmanagement.OnLoadCompleted;
+import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.UI.Etablissement.EtablissementActivity;
 

@@ -3,10 +3,10 @@ package com.example.etablissementmanagement.Repositories;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.etablissementmanagement.DAO.EtablissementDao;
+import com.example.etablissementmanagement.DataBase.DAO.EtablissementDao;
 import com.example.etablissementmanagement.DataBase.Database;
 import com.example.etablissementmanagement.Models.Etablissement;
-import com.example.etablissementmanagement.OnLoadCompleted;
+import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 
 import java.util.List;
 

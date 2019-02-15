@@ -1,4 +1,4 @@
-package com.example.etablissementmanagement;
+package com.example.etablissementmanagement.Helper;
 
 public interface OnLoadCompleted {
     void OnLoadCompleted();

@@ -1,4 +1,4 @@
-package com.example.etablissementmanagement.DAO;
+package com.example.etablissementmanagement.DataBase.DAO;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

@@ -1,6 +1,8 @@
 package com.example.etablissementmanagement.UI;
 
 import android.app.Fragment;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,8 +17,11 @@ import android.widget.Toast;
 import com.example.etablissementmanagement.Repositories.UserRepository;
 import com.example.etablissementmanagement.Models.User;
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.ViewModel.LoginViewModel;
 
 public class SignUpFragment extends Fragment {
+
+    private LoginViewModel loginViewModel;
 
     private LoginActivity activity;
 
@@ -33,8 +38,6 @@ public class SignUpFragment extends Fragment {
     private ImageView back;
 
     private Button button;
-
-    private UserRepository userRepository;
 
     public static SignUpFragment getInstance() {
         SignUpFragment signUpFragment = new SignUpFragment();
@@ -63,7 +66,7 @@ public class SignUpFragment extends Fragment {
         confirmPassword = mainView.findViewById(R.id.confirm_password);
         back = mainView.findViewById(R.id.back_to_login);
         button = mainView.findViewById(R.id.registre_button);
-        userRepository = new UserRepository(activity.getApplication());
+        loginViewModel = ViewModelProviders.of(activity).get(LoginViewModel.class);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +88,9 @@ public class SignUpFragment extends Fragment {
             confirmPasswordText = confirmPassword.getText().toString();
 
             if (!userText.equals("") && !passwordText.equals("") && !confirmPasswordText.equals("")) {
-                Log.i("Text" , "HAAAHOWA TEXT" + userText + passwordText + confirmPasswordText);
-                Log.i("Text 2", userRepository.getUsers().toString());
                 if (passwordText.equals(confirmPasswordText)) {
                     User user = new User(userText, passwordText);
-                    userRepository.addUser(user);
+                    loginViewModel.addUser(user);
                     Toast.makeText(activity.getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
                     activity.navigateTo(LoginFragment.getInstance());
                 } else {

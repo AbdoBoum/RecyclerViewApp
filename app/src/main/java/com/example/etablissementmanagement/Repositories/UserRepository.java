@@ -4,10 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.example.etablissementmanagement.DAO.UserDao;
+import com.example.etablissementmanagement.DataBase.DAO.UserDao;
 import com.example.etablissementmanagement.DataBase.Database;
 import com.example.etablissementmanagement.Models.User;
-import com.example.etablissementmanagement.OnLoadCompleted;
+import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 
 import java.util.List;
 

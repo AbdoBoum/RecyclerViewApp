@@ -7,8 +7,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.example.etablissementmanagement.DAO.EtablissementDao;
-import com.example.etablissementmanagement.DAO.UserDao;
+import com.example.etablissementmanagement.DataBase.DAO.EtablissementDao;
+import com.example.etablissementmanagement.DataBase.DAO.UserDao;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.Models.User;
 

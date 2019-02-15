@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.etablissementmanagement.Models.Etablissement;
-import com.example.etablissementmanagement.OnLoadCompleted;
+import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.LoginActivity;
