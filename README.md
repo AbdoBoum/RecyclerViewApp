@@ -15,6 +15,7 @@ the app is still in progress we will add update and more other funcionalities.
   <li>How to use a recyclerview</li>
   <li>How to work with Room Persistence Library</li>
   <li>How to work with AsyncTask class</li>
+  <li>How to use viewModel</li>
 </ul>
 
 
