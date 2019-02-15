@@ -1,6 +1,5 @@
 package com.example.etablissementmanagement.UI.Etablissement;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,24 +18,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
-import com.example.etablissementmanagement.UI.LoginActivity;
 
-import java.io.File;
 
 public class add_fragment extends Fragment {
     private View mainView;
-    
+
     public static int REQ_CODE = 1;
 
     private EtablissementActivity activity;
 
     private EditText title;
     private EditText description;
+
 
     private LinearLayout linearLayout;
 
@@ -87,7 +83,6 @@ public class add_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.add_etablissement_fragment, container, false);
-        getActivity().setTitle("Add Etablissement");
         return mainView;
     }
 
@@ -99,6 +94,7 @@ public class add_fragment extends Fragment {
     }
 
     void init() {
+        activity.getSupportActionBar().setTitle("Add etablissement");
         title = mainView.findViewById(R.id.etablissement_title);
         description = mainView.findViewById(R.id.etablissement_description);
         addButton = mainView.findViewById(R.id.add_button);
@@ -116,7 +112,7 @@ public class add_fragment extends Fragment {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select a Picture"),REQ_CODE);
+            startActivityForResult(Intent.createChooser(intent, "Select a Picture"), REQ_CODE);
         }
     }
 
@@ -126,7 +122,7 @@ public class add_fragment extends Fragment {
         public void onClick(View v) {
             titleText = title.getText().toString();
             descriptionText = description.getText().toString();
-            if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && !currImageURI.equals(null)) {
+            if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && !currImageURI.getPath().equals("")) {
                 repository.addEtablissement(new Etablissement(titleText, descriptionText, getRealPathFromURI(currImageURI)));
                 Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
                 activity.navigateTo(recyclerView.getInstance());
@@ -159,9 +155,9 @@ public class add_fragment extends Fragment {
 
     private String getRealPathFromURI(Uri contentURI) {
         String result;
-        String [] proj={MediaStore.Images.Media.DATA};
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = activity.getContentResolver().query(contentURI, proj, null, null, null);
-        if (cursor == null) { // Source is Dropbox or other similar local file path
+        if (cursor == null) { 
             result = contentURI.getPath();
         } else {
             cursor.moveToFirst();
@@ -171,7 +167,6 @@ public class add_fragment extends Fragment {
         }
         return result;
     }
-
 
 
 }

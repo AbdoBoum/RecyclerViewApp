@@ -5,7 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".UI.Etablissement.EtablissementActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <FrameLayout
+        android:layout_below="@+id/toolbar"
         android:id="@+id/frame_container_etablissement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

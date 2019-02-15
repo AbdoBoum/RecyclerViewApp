@@ -1,9 +1,6 @@
 package com.example.etablissementmanagement.UI.Etablissement;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,9 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.OnLoadCompleted;
@@ -29,7 +23,6 @@ import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.LoginActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class recyclerView extends Fragment implements OnLoadCompleted {
@@ -68,7 +61,6 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.recycler_view, container, false);
-        getActivity().setTitle("Etablissements");
         return mainView;
     }
 
@@ -100,8 +92,8 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
     }
 
     void init() {
+        activity.getSupportActionBar().setTitle("Etablissements");
         add = mainView.findViewById(R.id.add_new_etab);
-
 
         repository = new EtablissementRepository(activity.getApplication());
         updateRecyclerView();
