@@ -20,5 +20,5 @@ the app is still in progress we will add update and more other funcionalities.
 
 <br><br>
 <strong>Some images from the app </strong>
-<br>
-<img src="https://i.ibb.co/BwvXqkt/Login.jpg" alt="Login Interface" width="540" height="960">
+<br><br>
+<img src="https://i.ibb.co/BwvXqkt/Login.jpg" alt="Login Interface" width="270" height="480">
