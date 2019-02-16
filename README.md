@@ -20,4 +20,4 @@ the app is still in progress we will add update and more other funcionalities.
 
 <br><br>
 <strong>Some images from the app </strong>
-<img src="https://imgur.com/YlPL078" alt="Login Interface" >
+<img src="https://i.ibb.co/BwvXqkt/Login.jpg" alt="Login Interface" >
