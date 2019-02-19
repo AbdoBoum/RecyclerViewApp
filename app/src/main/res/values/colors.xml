@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="primary">#6300EE</color>
+    <color name="mainColor">#6579EA</color>
+    <color name="primary">#7486ec</color>
     <color name="primaryVariant">#3600B3</color>
     <color name="secondary">#03DAC6</color>
     <color name="secondaryVariant">#018786</color>

@@ -76,8 +76,7 @@
         android:fontFamily="@font/varela"
         android:text="ADD"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:textSize="20sp" />
 
 
 
