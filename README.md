@@ -15,6 +15,12 @@ the app is still in progress we will add update and more other funcionalities.
   <li>How to use a recyclerview</li>
   <li>How to work with Room Persistence Library</li>
   <li>How to work with AsyncTask class</li>
+  <li>How to use viewModel</li>
 </ul>
 
-
+<br><br>
+<strong>Some images from the app </strong>
+<br><br>
+<img src="https://i.ibb.co/BwvXqkt/Login.jpg" alt="Login Interface" width="270" height="480">
+<img src="https://i.ibb.co/RDp3t7W/logout-menu.jpg" alt="RecyclerView" width="270" height="480">
+<img src="https://i.ibb.co/XsZNLhw/add.jpg" alt="Add" width="270" height="480">
