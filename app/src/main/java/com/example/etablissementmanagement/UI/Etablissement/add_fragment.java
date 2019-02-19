@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
+import com.example.etablissementmanagement.UI.GlideApp;
 
 
 public class add_fragment extends Fragment {
@@ -33,6 +34,7 @@ public class add_fragment extends Fragment {
     private EditText title;
     private EditText description;
 
+    boolean imagePicked = false;
 
     private LinearLayout linearLayout;
 
@@ -122,8 +124,8 @@ public class add_fragment extends Fragment {
         public void onClick(View v) {
             titleText = title.getText().toString();
             descriptionText = description.getText().toString();
-            if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && !currImageURI.getPath().equals("")) {
-                repository.addEtablissement(new Etablissement(titleText, descriptionText, getRealPathFromURI(currImageURI)));
+            if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && imagePicked) {
+                repository.addEtablissement(new Etablissement(titleText, descriptionText, imgPath));
                 Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
                 activity.navigateTo(recyclerView.getInstance());
             } else {
@@ -143,8 +145,12 @@ public class add_fragment extends Fragment {
 
                 // currImageURI is the global variable I'm using to hold the content:// URI of the image
                 currImageURI = data.getData();
+                imgPath = currImageURI.toString();
+                GlideApp.with(this)
+                        .load(currImageURI)
+                        .into(upload);
 
-                upload.setImageURI(currImageURI);
+                imagePicked = true;
             } else {
                 Toast.makeText(activity.getApplicationContext(), "Nothing Selected", Toast.LENGTH_SHORT).show();
             }
@@ -153,7 +159,7 @@ public class add_fragment extends Fragment {
         }
     }
 
-    private String getRealPathFromURI(Uri contentURI) {
+    /*private String getRealPathFromURI(Uri contentURI) {
         String result;
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = activity.getContentResolver().query(contentURI, proj, null, null, null);
@@ -167,6 +173,6 @@ public class add_fragment extends Fragment {
         }
         return result;
     }
-
+    */
 
 }

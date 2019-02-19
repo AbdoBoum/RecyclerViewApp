@@ -16,6 +16,7 @@ import com.example.etablissementmanagement.UI.GlideApp;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Etablissement> etablissements = new ArrayList<>();
@@ -26,11 +27,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.context = context;
     }
 
-    public void setOnItemClickListner(OnItemClickListner listner){
+    public void setOnItemClickListner(OnItemClickListner listner) {
         mlistner = listner;
     }
 
-    public interface OnItemClickListner{
+    public interface OnItemClickListner {
         void OnItemDelete(int position);
     }
 
@@ -38,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                                      .inflate(R.layout.etablissement_item, viewGroup, false);
+                .inflate(R.layout.etablissement_item, viewGroup, false);
         return new ViewHolder(itemView, mlistner);
     }
 
@@ -48,8 +49,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.textViewTitle.setText(currentEtablissement.getTitle());
         viewHolder.textViewBody.setText(currentEtablissement.getDescription());
         String url = currentEtablissement.getImagePath();
-        GlideApp.with(context).load(url)
-             .into(viewHolder.imageView);
+        GlideApp.with(context)
+                .load(url)
+                .into(viewHolder.imageView);
     }
 
 
@@ -86,7 +88,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 public void onClick(View v) {
                     if (listner != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listner.OnItemDelete(position);
                         }
                     }

@@ -19,11 +19,13 @@ public abstract class Database extends RoomDatabase {
 
     public abstract UserDao userDao();
 
+    private static final String DB_NAME = "etablissement_database";
+
     public abstract EtablissementDao etablissementDao();
 
     public static synchronized Database getInstance(Context context) {
         if (Instance == null) {
-            Instance = Room.databaseBuilder(context.getApplicationContext(), Database.class, "etablissement_database")
+            Instance = Room.databaseBuilder(context.getApplicationContext(), Database.class, DB_NAME)
                             .fallbackToDestructiveMigration()
                             .addCallback(roomCallback)
                             .build();

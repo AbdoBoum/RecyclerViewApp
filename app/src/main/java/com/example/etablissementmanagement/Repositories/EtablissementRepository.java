@@ -18,7 +18,6 @@ public class EtablissementRepository {
     public EtablissementRepository(Application application) {
         Database database = Database.getInstance(application);
         etablissementDao = database.etablissementDao();
-        //etablissements = etablissementDao.getEtablissements();
     }
 
     public EtablissementDao getEtablissementDao() {

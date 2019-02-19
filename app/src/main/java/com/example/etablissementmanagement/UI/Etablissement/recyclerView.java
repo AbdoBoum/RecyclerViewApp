@@ -17,8 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.Helper.OnLoadCompleted;
+import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.LoginActivity;
@@ -93,10 +93,12 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
 
     void init() {
         activity.getSupportActionBar().setTitle("Etablissements");
+
         add = mainView.findViewById(R.id.add_new_etab);
 
         repository = new EtablissementRepository(activity.getApplication());
-        updateRecyclerView();
+
+        recyclerView = mainView.findViewById(R.id.recycler);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -118,14 +120,10 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
                 activity.navigateTo(add_fragment.getInstance());
             }
         });
-    }
 
-    void updateRecyclerView() {
-        recyclerView = mainView.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext()));
         recyclerView.setHasFixedSize(true);
         adapter = new MyAdapter(activity.getApplicationContext());
-        //adapter.setEtablissements(list);
         adapter.setOnItemClickListner(new MyAdapter.OnItemClickListner() {
             @Override
             public void OnItemDelete(int position) {
@@ -135,6 +133,11 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
             }
         });
         recyclerView.setAdapter(adapter);
+        updateRecyclerView();
+    }
+
+    void updateRecyclerView() {
+        //adapter.setEtablissements(list);
         getEtablissementAsyncTask = new EtablissementRepository.getEtablissementAsyncTask(repository.getEtablissementDao(), this);
         getEtablissementAsyncTask.execute();
 
@@ -145,7 +148,7 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
         list = getEtablissementAsyncTask.getEtablissements();
         adapter.setEtablissements(list);
         adapter.notifyDataSetChanged();
-        Log.i("TAAG", String.valueOf(getEtablissementAsyncTask.getEtablissements().size()));
+        Log.i("TAG", String.valueOf(getEtablissementAsyncTask.getEtablissements().size()));
     }
 
 }
