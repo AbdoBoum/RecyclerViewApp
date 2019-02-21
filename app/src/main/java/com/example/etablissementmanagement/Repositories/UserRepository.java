@@ -1,7 +1,7 @@
 package com.example.etablissementmanagement.Repositories;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.example.etablissementmanagement.DataBase.DAO.UserDao;

@@ -2,12 +2,10 @@ package com.example.etablissementmanagement.UI;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.etablissementmanagement.R;
-import com.example.etablissementmanagement.ViewModel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 

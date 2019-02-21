@@ -1,18 +1,18 @@
 package com.example.etablissementmanagement.DataBase;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.example.etablissementmanagement.DataBase.DAO.EtablissementDao;
 import com.example.etablissementmanagement.DataBase.DAO.UserDao;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.Models.User;
 
-@android.arch.persistence.room.Database(entities = {User.class, Etablissement.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {User.class, Etablissement.class}, version = 1, exportSchema = false)
 public abstract class Database extends RoomDatabase {
 
     private static Database Instance;

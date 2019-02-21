@@ -1,8 +1,8 @@
 package com.example.etablissementmanagement.ViewModel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.annotation.NonNull;
 
 import com.example.etablissementmanagement.Repositories.UserRepository;
 import com.example.etablissementmanagement.Models.User;

@@ -1,10 +1,7 @@
 package com.example.etablissementmanagement.UI;
 
 import android.app.Fragment;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +11,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.etablissementmanagement.Repositories.UserRepository;
 import com.example.etablissementmanagement.Models.User;
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.ViewModel.LoginViewModel;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 public class SignUpFragment extends Fragment {
 
@@ -27,17 +31,24 @@ public class SignUpFragment extends Fragment {
 
     private View mainView;
 
-    private EditText username;
-    private EditText password;
-    private EditText confirmPassword;
+    @BindView(R2.id.username_registre)
+    EditText username;
+    @BindView(R2.id.password_registre)
+    EditText password;
+    @BindView(R2.id.confirm_password)
+    EditText confirmPassword;
 
     String userText;
     String passwordText;
     String confirmPasswordText;
 
-    private ImageView back;
+    @BindView(R2.id.back_to_login)
+    ImageView back;
 
+    @BindView(R2.id.registre_button)
     private Button button;
+
+    private Unbinder unbinder;
 
     public static SignUpFragment getInstance() {
         SignUpFragment signUpFragment = new SignUpFragment();
@@ -50,6 +61,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.fragment_registre, container, false);
+        unbinder = ButterKnife.bind(this, mainView);
         return mainView;
     }
 
@@ -61,11 +73,11 @@ public class SignUpFragment extends Fragment {
     }
 
     void init() {
-        username = mainView.findViewById(R.id.username_registre);
-        password = mainView.findViewById(R.id.password_registre);
-        confirmPassword = mainView.findViewById(R.id.confirm_password);
-        back = mainView.findViewById(R.id.back_to_login);
-        button = mainView.findViewById(R.id.registre_button);
+        //username = mainView.findViewById(R.id.username_registre);
+        //password = mainView.findViewById(R.id.password_registre);
+        //confirmPassword = mainView.findViewById(R.id.confirm_password);
+        //back = mainView.findViewById(R.id.back_to_login);
+        //button = mainView.findViewById(R.id.registre_button);
         loginViewModel = ViewModelProviders.of(activity).get(LoginViewModel.class);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +93,7 @@ public class SignUpFragment extends Fragment {
 
     private class ButtClick implements View.OnClickListener {
 
-        @Override
+        //@OnClick(R.id.registre_button)
         public void onClick(View v) {
             userText = username.getText().toString();
             passwordText = password.getText().toString();
@@ -97,11 +109,16 @@ public class SignUpFragment extends Fragment {
                     Toast.makeText(activity.getApplicationContext(), "Password doesn't match", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Log.i("Text" , "HAAAHOWA TEXT" + userText + passwordText + confirmPasswordText);
+                Log.i("Text", "Fields: " + userText + passwordText + confirmPasswordText);
                 Toast.makeText(activity.getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
 }
