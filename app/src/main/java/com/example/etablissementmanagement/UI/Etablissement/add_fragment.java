@@ -4,8 +4,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,10 +15,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.GlideApp;
+
+import androidx.annotation.Nullable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 public class add_fragment extends Fragment {
@@ -30,16 +36,21 @@ public class add_fragment extends Fragment {
 
     private EtablissementActivity activity;
 
-    private EditText title;
-    private EditText description;
+    @BindView(R2.id.etablissement_title)
+    EditText title;
+    @BindView(R2.id.etablissement_description)
+    EditText description;
+
+    @BindView(R2.id.lin_lay)
+    LinearLayout linearLayout;
+
+    @BindView(R2.id.add_button)
+    Button addButton;
+
+    @BindView(R2.id.upload)
+    ImageView upload;
 
     boolean imagePicked = false;
-
-    private LinearLayout linearLayout;
-
-    private Button addButton;
-
-    private ImageView upload;
 
     private String titleText;
     private String descriptionText;
@@ -47,6 +58,8 @@ public class add_fragment extends Fragment {
 
     private EtablissementRepository repository;
     private Uri currImageURI;
+
+    private Unbinder unbinder;
 
     public static add_fragment getInstance() {
         add_fragment _add_fragment = new add_fragment();
@@ -84,6 +97,7 @@ public class add_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.add_etablissement_fragment, container, false);
+        unbinder = ButterKnife.bind(this, mainView);
         return mainView;
     }
 
@@ -96,30 +110,21 @@ public class add_fragment extends Fragment {
 
     void init() {
         activity.getSupportActionBar().setTitle("Add etablissement");
-        title = mainView.findViewById(R.id.etablissement_title);
-        description = mainView.findViewById(R.id.etablissement_description);
-        addButton = mainView.findViewById(R.id.add_button);
-        upload = mainView.findViewById(R.id.upload);
-        upload.setOnClickListener(new ButtClick());
-        linearLayout = mainView.findViewById(R.id.lin_lay);
-        addButton.setOnClickListener(new SaveButtClick());
         repository = new EtablissementRepository(activity.getApplication());
     }
 
-    private class ButtClick implements View.OnClickListener {
 
-        @Override
-        public void onClick(View v) {
+        @OnClick(R2.id.upload)
+        public void onClickUpload(View v) {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select a Picture"), REQ_CODE);
         }
-    }
 
-    private class SaveButtClick implements View.OnClickListener {
 
-        @Override
+
+        @OnClick(R2.id.add_button)
         public void onClick(View v) {
             titleText = title.getText().toString();
             descriptionText = description.getText().toString();
@@ -128,11 +133,11 @@ public class add_fragment extends Fragment {
                 Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
                 activity.navigateTo(recyclerView.getInstance());
             } else {
-                Toast.makeText(activity.getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity.getApplicationContext(), "Complete all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-    }
+
 
 
     @Override
@@ -173,5 +178,10 @@ public class add_fragment extends Fragment {
         return result;
     }
     */
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
 }

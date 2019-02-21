@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -46,7 +47,7 @@ public class SignUpFragment extends Fragment {
     ImageView back;
 
     @BindView(R2.id.registre_button)
-    private Button button;
+    Button button;
 
     private Unbinder unbinder;
 
@@ -73,47 +74,36 @@ public class SignUpFragment extends Fragment {
     }
 
     void init() {
-        //username = mainView.findViewById(R.id.username_registre);
-        //password = mainView.findViewById(R.id.password_registre);
-        //confirmPassword = mainView.findViewById(R.id.confirm_password);
-        //back = mainView.findViewById(R.id.back_to_login);
-        //button = mainView.findViewById(R.id.registre_button);
         loginViewModel = ViewModelProviders.of(activity).get(LoginViewModel.class);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.navigateTo(LoginFragment.getInstance());
-            }
-        });
-
-        button.setOnClickListener(new ButtClick());
-
     }
 
-    private class ButtClick implements View.OnClickListener {
+    @OnClick(R2.id.back_to_login)
+    public void onClickBack(View v) {
+        activity.navigateTo(LoginFragment.getInstance());
+    }
 
-        //@OnClick(R.id.registre_button)
-        public void onClick(View v) {
-            userText = username.getText().toString();
-            passwordText = password.getText().toString();
-            confirmPasswordText = confirmPassword.getText().toString();
 
-            if (!userText.equals("") && !passwordText.equals("") && !confirmPasswordText.equals("")) {
-                if (passwordText.equals(confirmPasswordText)) {
-                    User user = new User(userText, passwordText);
-                    loginViewModel.addUser(user);
-                    Toast.makeText(activity.getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
-                    activity.navigateTo(LoginFragment.getInstance());
-                } else {
-                    Toast.makeText(activity.getApplicationContext(), "Password doesn't match", Toast.LENGTH_SHORT).show();
-                }
+    @OnClick(R2.id.registre_button)
+    public void onClickRegistre(View v) {
+        userText = username.getText().toString();
+        passwordText = password.getText().toString();
+        confirmPasswordText = confirmPassword.getText().toString();
+
+        if (!userText.equals("") && !passwordText.equals("") && !confirmPasswordText.equals("")) {
+            if (passwordText.equals(confirmPasswordText)) {
+                User user = new User(userText, passwordText);
+                loginViewModel.addUser(user);
+                Toast.makeText(activity.getApplicationContext(), "Account created", Toast.LENGTH_SHORT).show();
+                activity.navigateTo(LoginFragment.getInstance());
             } else {
-                Log.i("Text", "Fields: " + userText + passwordText + confirmPasswordText);
-                Toast.makeText(activity.getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity.getApplicationContext(), "Password doesn't match", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Log.i("Text", "Fields: " + userText + passwordText + confirmPasswordText);
+            Toast.makeText(activity.getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public void onDestroyView() {

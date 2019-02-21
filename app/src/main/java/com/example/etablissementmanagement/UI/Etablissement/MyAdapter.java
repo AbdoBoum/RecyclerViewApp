@@ -3,6 +3,9 @@ package com.example.etablissementmanagement.UI.Etablissement;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.UI.GlideApp;
 
 import java.util.ArrayList;
@@ -71,17 +75,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
-        private TextView textViewTitle;
-        private TextView textViewBody;
-        private ImageView delete;
+        @BindView(R2.id.imageView)
+        ImageView imageView;
+        @BindView(R2.id.textViewTitle)
+        TextView textViewTitle;
+        @BindView(R2.id.textViewBody)
+        TextView textViewBody;
+        @BindView(R2.id.close)
+        ImageView delete;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListner listner) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewBody = itemView.findViewById(R.id.textViewBody);
-            delete = itemView.findViewById(R.id.close);
+            ButterKnife.bind(this, itemView);
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override

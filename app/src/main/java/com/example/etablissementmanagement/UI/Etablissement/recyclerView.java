@@ -3,12 +3,21 @@ package com.example.etablissementmanagement.UI.Etablissement;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.etablissementmanagement.R2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,13 +44,17 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
 
     private View mainView;
 
-    private RecyclerView recyclerView;
+    @BindView(R2.id.recycler)
+    RecyclerView recyclerView;
 
     private MyAdapter adapter;
 
-    private FloatingActionButton add;
+    @BindView(R2.id.add_new_etab)
+    FloatingActionButton add;
 
     EtablissementRepository.getEtablissementAsyncTask getEtablissementAsyncTask;
+
+    private Unbinder unbinder;
 
     public static recyclerView getInstance() {
         recyclerView _recyclerView = new recyclerView();
@@ -61,6 +74,7 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.recycler_view, container, false);
+        unbinder = ButterKnife.bind(this, mainView);
         return mainView;
     }
 
@@ -94,11 +108,7 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
     void init() {
         activity.getSupportActionBar().setTitle("Etablissements");
 
-        add = mainView.findViewById(R.id.add_new_etab);
-
         repository = new EtablissementRepository(activity.getApplication());
-
-        recyclerView = mainView.findViewById(R.id.recycler);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -113,13 +123,6 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
-
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.navigateTo(add_fragment.getInstance());
-            }
-        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext()));
         recyclerView.setHasFixedSize(true);
@@ -136,8 +139,12 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
         updateRecyclerView();
     }
 
+    @OnClick(R2.id.add_new_etab)
+    public void onClickAdd(View v) {
+        activity.navigateTo(add_fragment.getInstance());
+    }
+
     void updateRecyclerView() {
-        //adapter.setEtablissements(list);
         getEtablissementAsyncTask = new EtablissementRepository.getEtablissementAsyncTask(repository.getEtablissementDao(), this);
         getEtablissementAsyncTask.execute();
 
@@ -149,6 +156,12 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
         adapter.setEtablissements(list);
         adapter.notifyDataSetChanged();
         Log.i("TAG", String.valueOf(getEtablissementAsyncTask.getEtablissements().size()));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }
