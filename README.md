@@ -29,6 +29,7 @@ the app is still in progress we will add update and more other funcionalities.
 <br><br>
 
 Credits / Libraries used:
+<br>
 *Butter Knife : <a href="https://github.com/JakeWharton/butterknife">https://github.com/JakeWharton/butterknife</a>
 <br>
 *Glide : <a href="https://github.com/bumptech/glide">https://github.com/bumptech/glide</a>
