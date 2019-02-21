@@ -25,3 +25,10 @@ the app is still in progress we will add update and more other funcionalities.
 <img src="https://i.ibb.co/ykq9YMP/registre.jpg" alt="Sign up" width="270" height="480">
 <img src="https://i.ibb.co/BBTXP0r/2-recycler.jpg" alt="RecyclerView" width="270" height="480">
 <img src="https://i.ibb.co/x7vRxgq/add.jpg" alt="Add" width="270" height="480">
+
+<br><br>
+
+Credits / Libraries used:
+*Butter Knife : <a href="https://github.com/JakeWharton/butterknife">https://github.com/JakeWharton/butterknife</a>
+*Glide : <a href="https://github.com/bumptech/glide">https://github.com/bumptech/glide</a>
+
