@@ -1,4 +1,4 @@
-package com.example.etablissementmanagement.UI;
+package com.example.etablissementmanagement.UI.Login;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -35,12 +35,6 @@ public class LoginFragment extends Fragment implements OnLoadCompleted {
     EditText username;
     @BindView(R2.id.password)
     EditText password;
-
-    @BindView(R2.id.registre)
-    TextView signUp;
-
-    @BindView(R2.id.login_button)
-    Button loginButton;
 
     private UserRepository userRepository;
 

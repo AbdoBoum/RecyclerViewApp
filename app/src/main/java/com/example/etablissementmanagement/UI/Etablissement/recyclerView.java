@@ -3,21 +3,6 @@ package com.example.etablissementmanagement.UI.Etablissement;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.example.etablissementmanagement.R2;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,10 +14,22 @@ import android.view.ViewGroup;
 import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
-import com.example.etablissementmanagement.UI.LoginActivity;
+import com.example.etablissementmanagement.UI.Login.LoginActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class recyclerView extends Fragment implements OnLoadCompleted {
 
@@ -110,30 +107,13 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
 
         repository = new EtablissementRepository(activity.getApplication());
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                repository.deleteEtablissement(adapter.getEtablissementAt(viewHolder.getAdapterPosition()));
-                list.remove(viewHolder.getAdapterPosition());
-                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-            }
-        }).attachToRecyclerView(recyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext()));
         recyclerView.setHasFixedSize(true);
         adapter = new MyAdapter(activity.getApplicationContext());
-        adapter.setOnItemClickListner(new MyAdapter.OnItemClickListner() {
-            @Override
-            public void OnItemDelete(int position) {
-                repository.deleteEtablissement(adapter.getEtablissementAt(position));
-                list.remove(position);
-                adapter.notifyItemRemoved(position);
-            }
+        adapter.setOnItemClickListner(position -> {
+            repository.deleteEtablissement(adapter.getEtablissementAt(position));
+            list.remove(position);
+            adapter.notifyItemRemoved(position);
         });
         recyclerView.setAdapter(adapter);
         updateRecyclerView();

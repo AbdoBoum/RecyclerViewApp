@@ -17,12 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.etablissementmanagement.Models.Etablissement;
+import com.example.etablissementmanagement.Notification.BuildNotification;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.GlideApp;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,6 +37,8 @@ public class add_fragment extends Fragment {
     public static int REQ_CODE = 1;
 
     private EtablissementActivity activity;
+
+    private BuildNotification buildNotification;
 
     @BindView(R2.id.etablissement_title)
     EditText title;
@@ -92,7 +96,6 @@ public class add_fragment extends Fragment {
 
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -130,6 +133,14 @@ public class add_fragment extends Fragment {
             descriptionText = description.getText().toString();
             if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && imagePicked) {
                 repository.addEtablissement(new Etablissement(titleText, descriptionText, imgPath));
+                /**
+                 * You can display a notification when a user
+                 * add a new note
+                 */
+                buildNotification = new BuildNotification(NotificationManagerCompat.from(activity.getApplicationContext()),
+                        activity.getApplicationContext(),
+                        EtablissementActivity.class);
+                buildNotification.displayNotification();
                 Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
                 activity.navigateTo(recyclerView.getInstance());
             } else {
