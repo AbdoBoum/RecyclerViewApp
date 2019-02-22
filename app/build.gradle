@@ -60,4 +60,7 @@ dependencies {
     //Butter knife for data binding
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
