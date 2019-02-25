@@ -2,6 +2,9 @@ package com.example.etablissementmanagement.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 
 import com.example.etablissementmanagement.Models.User;
 import com.google.gson.Gson;
@@ -30,7 +33,6 @@ public class Utils {
     public static User  getUser(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         Gson gson = new Gson();
-        //get from shared prefs
         String storedUserString = prefs.getString(USER_LOGIN, null);
         java.lang.reflect.Type type = new TypeToken<User>(){}.getType();
         User user = null;
@@ -44,6 +46,21 @@ public class Utils {
             user =  gson.fromJson(storedUserString, type);
         }
         return user;
+    }
+
+    private static String getRealPathFromURI(Uri contentURI, Context context) {
+        String result;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(contentURI, proj, null, null, null);
+        if (cursor == null) {
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
 
 }

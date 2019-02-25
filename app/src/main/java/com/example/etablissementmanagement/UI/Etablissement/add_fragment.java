@@ -16,12 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.Notification.BuildNotification;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
-import com.example.etablissementmanagement.UI.GlideApp;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
@@ -114,41 +114,38 @@ public class add_fragment extends Fragment {
     void init() {
         activity.getSupportActionBar().setTitle("Add etablissement");
         repository = new EtablissementRepository(activity.getApplication());
+        buildNotification = new BuildNotification(NotificationManagerCompat.from(activity.getApplicationContext()),
+                activity.getApplicationContext(),
+                EtablissementActivity.class);
     }
 
 
-        @OnClick(R2.id.upload)
-        public void onClickUpload(View v) {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select a Picture"), REQ_CODE);
+    @OnClick(R2.id.upload)
+    public void onClickUpload(View v) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select a Picture"), REQ_CODE);
+    }
+
+
+    @OnClick(R2.id.add_button)
+    public void onClick(View v) {
+        titleText = title.getText().toString();
+        descriptionText = description.getText().toString();
+        if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && imagePicked) {
+            repository.addEtablissement(new Etablissement(titleText, descriptionText, imgPath));
+            /**
+             * You can display a notification when a user add a new note or comment the line bellow
+             */
+            buildNotification.displayNotification();
+            Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
+            activity.navigateTo(recyclerView.getInstance());
+        } else {
+            Toast.makeText(activity.getApplicationContext(), "Complete all fields", Toast.LENGTH_SHORT).show();
+            return;
         }
-
-
-
-        @OnClick(R2.id.add_button)
-        public void onClick(View v) {
-            titleText = title.getText().toString();
-            descriptionText = description.getText().toString();
-            if (!titleText.trim().equals("") && !descriptionText.trim().equals("") && imagePicked) {
-                repository.addEtablissement(new Etablissement(titleText, descriptionText, imgPath));
-                /**
-                 * You can display a notification when a user
-                 * add a new note
-                 */
-                buildNotification = new BuildNotification(NotificationManagerCompat.from(activity.getApplicationContext()),
-                        activity.getApplicationContext(),
-                        EtablissementActivity.class);
-                buildNotification.displayNotification();
-                Toast.makeText(activity.getApplicationContext(), "Etablissement Inserted", Toast.LENGTH_SHORT).show();
-                activity.navigateTo(recyclerView.getInstance());
-            } else {
-                Toast.makeText(activity.getApplicationContext(), "Complete all fields", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-
+    }
 
 
     @Override
@@ -161,7 +158,7 @@ public class add_fragment extends Fragment {
                 // currImageURI is the global variable I'm using to hold the content:// URI of the image
                 currImageURI = data.getData();
                 imgPath = currImageURI.toString();
-                GlideApp.with(this)
+                Glide.with(this)
                         .load(currImageURI)
                         .into(upload);
 
@@ -174,23 +171,9 @@ public class add_fragment extends Fragment {
         }
     }
 
-    /*private String getRealPathFromURI(Uri contentURI) {
-        String result;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = activity.getContentResolver().query(contentURI, proj, null, null, null);
-        if (cursor == null) { 
-            result = contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            result = cursor.getString(idx);
-            cursor.close();
-        }
-        return result;
-    }
-    */
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }

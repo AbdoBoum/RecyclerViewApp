@@ -7,8 +7,9 @@ import android.os.Build;
 
 public class App extends Application {
 
-    public static final String CHANNEL_ID = "android.app.Application.Channel_101";
-    public static final String CHANNEL_NAME = "android.app.Application.mChannel";
+    public static final String CHANNEL_ID = "channel1";
+    public static final String CHANNEL_NAME = "Channel 1";
+    public static final String CHANNEL_DESCRIPTION = "This is a channel to display notifications";
 
     @Override
     public void onCreate() {
@@ -17,12 +18,12 @@ public class App extends Application {
     }
 
     private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,
                     CHANNEL_NAME,
                     NotificationManager.IMPORTANCE_DEFAULT);
 
-            notificationChannel.setDescription("This is a channel to display notifications");
+            notificationChannel.setDescription(CHANNEL_DESCRIPTION);
 
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
 

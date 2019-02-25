@@ -3,9 +3,13 @@ package com.example.etablissementmanagement.UI.Login;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.etablissementmanagement.R;
+import com.example.etablissementmanagement.UI.Etablissement.EtablissementActivity;
+import com.example.etablissementmanagement.Utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -13,7 +17,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.navigateTo(LoginFragment.getInstance());
+        if (Utils.getUser(this) != null) {
+            Intent intent = new Intent(this, EtablissementActivity.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+            this.navigateTo(LoginFragment.getInstance());
+        }
     }
 
     public void navigateTo(Fragment fragment) {

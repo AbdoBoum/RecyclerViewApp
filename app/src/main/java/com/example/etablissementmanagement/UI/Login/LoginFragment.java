@@ -24,6 +24,7 @@ import com.example.etablissementmanagement.Models.User;
 import com.example.etablissementmanagement.Helper.OnLoadCompleted;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.UI.Etablissement.EtablissementActivity;
+import com.example.etablissementmanagement.Utils.Utils;
 
 public class LoginFragment extends Fragment implements OnLoadCompleted {
 
@@ -85,9 +86,9 @@ public class LoginFragment extends Fragment implements OnLoadCompleted {
     public void onClickLogin(View v) {
         usernameText = username.getText().toString();
         passwordText = password.getText().toString();
-        user = new User(usernameText, passwordText);
 
         if (!usernameText.equals("") && !passwordText.equals("")) {
+            user = new User(usernameText, passwordText);
             getUserAsyncTask = new UserRepository.getUserAsyncTask(userRepository.getUserDao(), callback);
             getUserAsyncTask.execute(user);
         } else {
@@ -99,6 +100,7 @@ public class LoginFragment extends Fragment implements OnLoadCompleted {
     @Override
     public void OnLoadCompleted() {
         if (getUserAsyncTask.getUser() != null) {
+            Utils.addUserToSharedPrefs(activity.getApplicationContext(), user);
             Intent intent = new Intent(activity, EtablissementActivity.class);
             activity.startActivity(intent);
             activity.finish();

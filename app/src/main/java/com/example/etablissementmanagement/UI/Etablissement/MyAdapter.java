@@ -1,24 +1,24 @@
 package com.example.etablissementmanagement.UI.Etablissement;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.etablissementmanagement.Models.Etablissement;
 import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.R2;
-import com.example.etablissementmanagement.UI.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -53,9 +53,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.textViewTitle.setText(currentEtablissement.getTitle());
         viewHolder.textViewBody.setText(currentEtablissement.getDescription());
         String url = currentEtablissement.getImagePath();
-        GlideApp.with(context)
+        Glide.with(context)
                 .load(url)
                 .into(viewHolder.imageView);
+        viewHolder.current = currentEtablissement;
     }
 
 
@@ -73,7 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return etablissements.get(position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R2.id.imageView)
         ImageView imageView;
@@ -83,6 +84,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView textViewBody;
         @BindView(R2.id.close)
         ImageView delete;
+
+        private Etablissement current;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListner listner) {
             super(itemView);

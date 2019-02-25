@@ -17,6 +17,7 @@ import com.example.etablissementmanagement.R;
 import com.example.etablissementmanagement.R2;
 import com.example.etablissementmanagement.Repositories.EtablissementRepository;
 import com.example.etablissementmanagement.UI.Login.LoginActivity;
+import com.example.etablissementmanagement.Utils.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -93,6 +94,7 @@ public class recyclerView extends Fragment implements OnLoadCompleted {
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent intent = new Intent(activity, LoginActivity.class);
+                Utils.removeUser(activity.getApplicationContext());
                 activity.startActivity(intent);
                 activity.finish();
                 return true;

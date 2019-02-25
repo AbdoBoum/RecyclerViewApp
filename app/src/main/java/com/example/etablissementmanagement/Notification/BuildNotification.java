@@ -37,7 +37,6 @@ public class BuildNotification {
     /**
      * Function to create a notification and put it in the channel created in App.java
      */
-
     public void displayNotification() {
         Intent intent = new Intent(context, aClass);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
