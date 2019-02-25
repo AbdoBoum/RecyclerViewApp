@@ -16,6 +16,8 @@ the app is still in progress we will add update and more other funcionalities.
   <li>How to work with Room Persistence Library</li>
   <li>How to work with AsyncTask class</li>
   <li>How to use viewModel</li>
+  <li>How to use SharedPreferences</li>
+  <li>How to display notifications</li>
 </ul>
 
 <br><br>
